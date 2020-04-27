@@ -33,7 +33,8 @@ for page_no, df in enumerate(df_list):
 					filename = relative_url.split("/")[-1]
 					file_ext = filename.split(".")[-1]
 					# Use page_no and index to make titles unique in case same title by different authors.
-					dest_file = 'springerbooks/{}_{}_{}.{}'.format(row[1].replace(" ", "_"), page_no, index, file_ext)
+					escaped_book_title = row[1].replace(" ", "_").replace("\\", "-").replace("/", "-")
+					dest_file = 'springerbooks/{}_{}_{}.{}'.format(escaped_book_title, page_no, index, file_ext)
 					pdf_url = 'https://link.springer.com{}'.format(relative_url)
 					if not os.path.exists(dest_file):
 						print("   - Downloading from", pdf_url, "to", dest_file)
